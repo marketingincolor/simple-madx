@@ -1,36 +1,48 @@
 <?php
 /**
- * The template for displaying pages
+ * The template for displaying Download custom page
  *
- * This is the template that displays all pages by default.
  * Please note that this is the WordPress construct of pages and that
  * other "pages" on your WordPress site will use a different template.
  *
  * @package FoundationPress
  * @since FoundationPress 1.0.0
  */
-
-global $post; 
-$pageslug = $post->post_name;
-$url = $_SERVER['REQUEST_URI'];
-
-if (strpos($url, 'general') !== false) {
-    $lookup = 'general';
-}
-
-get_header(); ?>
+get_header();
+global $post; ?>
 
 <section class="page-content">
 	<div class="grid-container">
-		<div class="grid-x grid-margin-y">
-			<div class="small-10 small-offset-1 large-8 large-offset-2 cell columns">
-				<?php if (function_exists('wordpress_breadcrumbs')) wordpress_breadcrumbs(); ?>
-			</div>
-		</div>
+		<main class="grid-x grid-margin-y">
+			<div <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
+				<div class="">
 
+					<?php 
+					$new_cats = get_categories( array(
+						'taxonomy' => 'dlm_download_category',
+						'orderby' => 'name',
+						'parent'  => 0
+					) ); 
+					foreach ( $new_cats as $single_cat ) {
+					    printf( '<a href="%1$s" class="cat-folder"><i class="fa fa-folder" aria-hidden="true"></i>%2$s</a>',
+					        //esc_url( '/downloads/'. $single_cat->category_nicename /*get_category_link( $single_cat->term_id )*/ ),
+					    	esc_url( site_url('/downloads/'. $single_cat->category_nicename) ),
+					        esc_html( $single_cat->name )
+					    );
+					}
+					?>
+
+				</div>
+			</div>
+		</main>
+	</div>
+</section>
+
+<section class="page-content">
+	<div class="grid-container">
 		<main class="grid-x grid-margin-y">
 			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'template-parts/content', 'page' ); ?>
+				<?php get_template_part( 'template-parts/content', 'download' ); ?>
 			<?php endwhile; ?>
 		</main>
 		</div>
@@ -38,77 +50,29 @@ get_header(); ?>
 </section>
 
 <section class="page-downloads">
-
-    <div class="grid-container">
-        <main class="grid-x grid-margin-y">
-            <article id="post-<?php the_ID(); ?>" <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
-                <div class="entry-content">
-                    <?php echo do_shortcode('[downloads category="'.$pageslug.'" template="brandhub"]'); ?>
-                </div>
-            </article>
-        </main>
-    </div>
-
-
-
-
-
-
-
-
-    <div class="grid-container">
-        <main class="grid-x grid-margin-y">
-            <article id="post-<?php the_ID(); ?>" <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
-                <div class="entry-content">
-
-
-                <?php
-                    $args = array(
-                        'post_type' => 'dlm_download',
-                		'showposts'    => '999',
-                        //'dlm_download_category' => $term->slug,
-                        //'dlm_download_category' => $lookup,
-                        'dlm_download_category' => $pageslug,
-                	'order'          => 'ASC',
-                    	'orderby'        => 'title'
-                    );
-                    $query = new WP_Query( $args ); 
-                ?>
-                <?php  while ( $query->have_posts() ) : $query->the_post(); //var_dump($dlm_download); ?>
-
-                    <div><a class="document-link" href="<?php $dlm_download->the_download_link(); ?>"><?php echo $dlm_download->get_the_title(); ?></a></div>
-                    <div class="description"><?php echo $dlm_download->get_the_short_description(); ?></div>
-                    <div class="date">Published: <?php $date = $dlm_download->get_the_file_date(); $date = date_create($date); echo date_format($date, 'F j, Y');?></div>
-                    <div class="dl-button"><a href="<?php $dlm_download->the_download_link(); ?>">Download</a></div>
-                    <div class="dl-count"><?php echo $dlm_download->get_the_download_count(); ?> downloads</div>
-
-                	<div class="dl-count">Category: 
-                		<?php 
-                			foreach (get_the_terms($dlm_download->get_id(), 'dlm_download_category') as $cat) {
-                				echo $cat->name;
-                			}
-                			//$dlm_download->get_id(); 
-                		?> 
-                	</div>
-
-                <?php endwhile;  wp_reset_postdata(); ?>  
-
-
-                </div>
-            </article>
-        </main>
-    </div>
-</section>
-
-
-<hr><hr><hr>
-
-
-<section class="page-downloads">
 	<div class="grid-container">
 		<main class="grid-x grid-margin-y">
 			<article id="post-<?php the_ID(); ?>" <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
 				<div class="entry-content">
+
+					<?php 
+					$args = array(
+					  'public'   => true,
+					  '_builtin' => false
+					  
+					); 
+					$output = 'names'; // or objects
+					$operator = 'and'; // 'and' or 'or'
+					$taxonomies = get_taxonomies( $args, $output, $operator ); 
+					if ( $taxonomies ) {
+					  foreach ( $taxonomies  as $taxonomy ) {
+					    echo '<p>' . $taxonomy . '</p>';
+					  }
+					}
+					?>
+
+					<hr><hr><hr>
+
 					<?php if ( is_user_logged_in() ) { ?>
 					<?php //if ( current_user_can( 'view_sunscape' ) ) {  ?>
 
@@ -116,7 +80,6 @@ get_header(); ?>
 
 						echo "<div class='grid-x grid-padding-x medium-up-3 large-up-4'>";
 						$terms = get_terms( 'dlm_download_category' );
-		//var_dump($terms);
 						foreach ( $terms as $term ) {
 							$slug = $term->slug;
 							echo "<div class='cell'>";
@@ -139,8 +102,16 @@ get_header(); ?>
 </section>
 
 
+<?php
+/*$terms = get_terms( 'dlm_download_category' );
+foreach ( $terms as $term ) {
+	echo "<h2>" . $term->name . "</h2>";
+	$slug = $term->slug;
+	echo do_shortcode( "[downloads category='$slug']" );
+}*/
 
 
+?>
 
 
 
@@ -219,7 +190,15 @@ foreach( $terms as $term ) {
         	<?php endwhile;  echo '</tbody></table></div>';  wp_reset_postdata();} ?>        
        
    </div>
- </div>  
+ </div>                 
+
+
+
+
+
+
+
+
 
 
 <?php

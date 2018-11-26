@@ -50,12 +50,7 @@ get_header(); ?>
 	<div class="grid-container">
 		<div class="grid-x grid-margin-x">
 			<div class="medium-6 small-10 small-offset-1 cell">
-				<?php if(get_field('event_date')) { ?>
-					<p class="subhead"><strong><?php the_field('event_date'); ?></strong></p>
-				<?php } ?>
-				<?php if(get_field('news_subhead')) { ?>
-					<h4 class="subhead blue"><strong><?php the_field('news_subhead'); ?></strong></h4>
-				<?php } ?>
+
 				<?php the_content(); ?>
 
 				<div class="grid-x next-prev">
