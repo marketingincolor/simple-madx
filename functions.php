@@ -149,8 +149,11 @@ require_once( 'library/shortcodes.php' );
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
 
 
+//////////////////////////////////////////////////////////
+// ADDITIONAL FUNCTIONS FOR MINIMAL THEME CUSTOMIZATION //
+//////////////////////////////////////////////////////////
 
-
+// Add breadcrumbs to page via PHP embed: if (function_exists('wordpress_breadcrumbs')) wordpress_breadcrumbs();
 function wordpress_breadcrumbs() {
   $delimiter = '&raquo;';
   $name = 'Home'; //text for the 'Home' link
@@ -224,3 +227,187 @@ function wordpress_breadcrumbs() {
     echo '</div>';
   }
 }
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// THIS IS ONLY TEMPORARY FOR SPECIFIC TESTING - MAY NOT END UP GETTING USED //
+///////////////////////////////////////////////////////////////////////////////
+
+// Add breadcrumbs to page via PHP embed: if (function_exists('wordpress_tax_breadcrumbs')) wordpress_tax_breadcrumbs();
+function wordpress_tax_breadcrumbs() {
+  $delimiter = '&raquo;';
+  $name = 'Home'; //text for the 'Home' link
+  $currentBefore = '<span class="current">';
+  $currentAfter = '</span>';
+  if ( !is_home() && !is_front_page() || is_paged() ) {
+    echo '<div id="crumbs">';
+    global $post;
+    $home = get_bloginfo('url');
+    echo '<a href="' . $home . '">' . $name . '</a> ' . $delimiter . ' ';
+    if ( is_category() ) {
+      global $wp_query;
+      $cat_obj = $wp_query->get_queried_object();
+      $thisCat = $cat_obj->term_id;
+      $thisCat = get_category($thisCat);
+      $parentCat = get_category($thisCat->parent);
+      if ($thisCat->parent != 0) echo(get_category_parents($parentCat, TRUE, ' ' . $delimiter . ' '));
+      echo $currentBefore . 'Archive by category &#39;';
+      single_cat_title();
+      echo '&#39;' . $currentAfter;
+    } elseif ( is_day() ) {
+      echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
+      echo '<a href="' . get_month_link(get_the_time('Y'),get_the_time('m')) . '">' . get_the_time('F') . '</a> ' . $delimiter . ' ';
+      echo $currentBefore . get_the_time('d') . $currentAfter;
+    } elseif ( is_month() ) {
+      echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
+      echo $currentBefore . get_the_time('F') . $currentAfter;
+    } elseif ( is_year() ) {
+      echo $currentBefore . get_the_time('Y') . $currentAfter;
+    } elseif ( is_single() ) {
+      $cat = get_the_category(); $cat = $cat[0];
+      echo get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
+      echo $currentBefore;
+      the_title();
+      echo $currentAfter;
+    } elseif ( is_page() && !$post->post_parent ) {
+      echo $currentBefore;
+      the_title();
+      echo $currentAfter;
+    } elseif ( is_page() && $post->post_parent ) {
+      $parent_id = $post->post_parent;
+      $breadcrumbs = array();
+      while ($parent_id) {
+        $page = get_page($parent_id);
+        $breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a>';
+        $parent_id = $page->post_parent;
+      }
+      $breadcrumbs = array_reverse($breadcrumbs);
+      foreach ($breadcrumbs as $crumb) echo $crumb . ' ' . $delimiter . ' ';
+      echo $currentBefore;
+      the_title();
+      echo $currentAfter;
+    } elseif ( is_search() ) {
+      echo $currentBefore . 'Search results for &#39;' . get_search_query() . '&#39;' . $currentAfter;
+    } elseif ( is_tag() ) {
+      echo $currentBefore . 'Posts tagged &#39;';
+      single_tag_title();
+      echo '&#39;' . $currentAfter;
+    } elseif ( is_author() ) {
+      global $author;
+      $userdata = get_userdata($author);
+      echo $currentBefore . 'Articles posted by ' . $userdata->display_name . $currentAfter;
+    } elseif ( is_404() ) {
+      echo $currentBefore . 'Error 404' . $currentAfter;
+    } 
+
+
+
+    elseif ( is_tax() ) {
+      global $wp_query;
+      $lvl_1 = '';
+      $lvl_2 = '';
+      $lvl_3 = '';
+      $lvl_4 = '';
+      $lvl_5 = '';
+      $tax_obj = $wp_query->get_queried_object();
+      $useTerm = $tax_obj->term_id;
+      $useTax = 'dlm_download_category';
+      $taxTerm = get_term($useTerm, $useTax);
+      $ttp_lvl_1_id = $taxTerm->parent;
+      $ttp_lvl_1_term = get_term($ttp_lvl_1_id, $useTax);
+      $lvl_1 = isset($ttp_lvl_1_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_1_term->slug.' ">'.$ttp_lvl_1_term->name.'</a> &raquo; ' : '';
+
+      $ttp_lvl_2_id = $ttp_lvl_1_term->parent;
+      $ttp_lvl_2_term = get_term($ttp_lvl_2_id, $useTax);
+      $lvl_2 = isset($ttp_lvl_2_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_2_term->slug.' ">'.$ttp_lvl_2_term->name.'</a> &raquo; ' : '';
+
+      $ttp_lvl_3_id = $ttp_lvl_2_term->parent;
+      $ttp_lvl_3_term = get_term($ttp_lvl_3_id, $useTax);
+      $lvl_3 = isset($ttp_lvl_3_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_3_term->slug.' ">'.$ttp_lvl_3_term->name.'</a> &raquo; ' : '';
+
+      echo $currentBefore . $lvl_5 . $lvl_4 . $lvl_3 . $lvl_2 . $lvl_1 . $taxTerm->name . $currentAfter;
+
+    }
+
+
+
+    if ( get_query_var('paged') ) {
+    if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) echo ' (';
+      echo __('Page') . ' ' . get_query_var('paged');
+    if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) echo ')';
+    }
+    echo '</div>';
+  }
+}
+
+
+
+
+
+
+
+
+//////////////////////////
+// CUSTOM WALKER TEST 1 //
+//////////////////////////
+
+class My_Custom_Walker extends Walker
+{
+   public $tree_type = 'category';
+   public $db_fields = array ('parent' => 'parent', 'id' => 'term_id');
+   public $max_pages = 10;
+   public function start_lvl( &$output, $depth = 0, $args = array() ) {
+      $output .= "<ul class='children'>\n";
+   }
+   public function end_lvl( &$output, $depth = 0, $args = array() ) {
+      $output .= "</ul>\n";
+   }
+   public function start_el( &$output, $category, $depth = 0, $args = array(), $current_object_id = 0 ) {
+      $output .= "<li>" . $category->name . "\n";
+   }
+   public function end_el( &$output, $category, $depth = 0, $args = array() ) {
+      $output .= "</li>\n";
+   }
+}
+function my_init() {
+   add_shortcode( 'categorylist', 'my_list' );
+}
+add_action('init', 'my_init');
+
+function my_list( $atts ){
+   $list = wp_list_categories( array( 'echo' => 0, 'walker' => new My_Custom_Walker() ) );
+   return $list;
+}
+
+
+
+
+//////////////////////////
+// CUSTOM WALKER TEST 2 //
+//////////////////////////
+
+class Walker_Category_Custom extends Walker_Category {
+  function start_lvl(&$output, $depth=0, $args=array()) {
+    $output .= " <ul> ";
+  }
+  function end_lvl(&$output, $depth=0, $args=array()) {
+    $output .= " </ul> ";
+  }
+  function start_el(&$output, $item, $depth=0, $args=array(),$current_object_id = 0) {
+    $output.= '<li><a href="'.home_url('category/'.$item->slug).' "><img src="http://some_path_here/images/'.($item->slug).'.jpg">'.esc_attr($item->name);
+    //in this case you should create images with names of category slugs
+  }
+  function end_el(&$output, $item, $depth=0, $args=array()) {
+    $output .= "</a></li>";
+  }
+}
+
+
+
+
+
+ 

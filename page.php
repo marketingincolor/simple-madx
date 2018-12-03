@@ -43,6 +43,7 @@ get_header(); ?>
         <main class="grid-x grid-margin-y">
             <article id="post-<?php the_ID(); ?>" <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
                 <div class="entry-content">
+                    <h5>downloads shortcode with pageslug category</h5>
                     <?php echo do_shortcode('[downloads category="'.$pageslug.'" template="brandhub"]'); ?>
                 </div>
             </article>
@@ -60,8 +61,8 @@ get_header(); ?>
         <main class="grid-x grid-margin-y">
             <article id="post-<?php the_ID(); ?>" <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
                 <div class="entry-content">
-
-
+                
+                <h5>get_the_terms method for DLM post type with pageslug</h5>
                 <?php
                     $args = array(
                         'post_type' => 'dlm_download',
@@ -101,8 +102,6 @@ get_header(); ?>
 </section>
 
 
-<hr><hr><hr>
-
 
 <section class="page-downloads">
 	<div class="grid-container">
@@ -111,7 +110,8 @@ get_header(); ?>
 				<div class="entry-content">
 					<?php if ( is_user_logged_in() ) { ?>
 					<?php //if ( current_user_can( 'view_sunscape' ) ) {  ?>
-
+                    
+                    <h5>get_terms method for DLM post type using slug</h5>
 						<?php
 
 						echo "<div class='grid-x grid-padding-x medium-up-3 large-up-4'>";
@@ -120,7 +120,7 @@ get_header(); ?>
 						foreach ( $terms as $term ) {
 							$slug = $term->slug;
 							echo "<div class='cell'>";
-							echo "<h4><a href='../?dlm_download_category=" . $term->slug . "'>" . $term->name . "</a></h4>";
+							echo "<h4><a href='".site_url()."/?dlm_download_category=" . $term->slug . "'>" . $term->name . "</a></h4>";
 							echo do_shortcode( "[downloads category='$slug' template='brandhub']" );
 							echo "</div>";
 						}
@@ -144,22 +144,9 @@ get_header(); ?>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="single-post-wrap">
     <div class="container">  
+        <h5>get_terms method for DLM post type using slug (w/content render)</h5>
     	 <?php //start by fetching the terms for the dlm_download_category taxonomy
 $terms = get_terms( 'dlm_download_category', array(
     'orderby'    => 'count',
@@ -168,7 +155,7 @@ $terms = get_terms( 'dlm_download_category', array(
 ) );
 ?>
 
-            <?php
+<?php
 // now run a query for each category - display results in alpha order
 foreach( $terms as $term ) {
  
@@ -216,7 +203,11 @@ foreach( $terms as $term ) {
                 <td class="type"><a href="<?php $dlm_download->the_download_link(); ?>"><img class="doc-icon" src="<?php bloginfo('template_url'); ?>/images/filetype-<?php echo $dlm_download->get_the_filetype(); ?>.svg" title="download the <?php echo $dlm_download->get_the_filetype(); ?>" alt="download the <?php echo $dlm_download->get_the_filetype(); ?>" border="0" /></a></td>
         	</tr> 
             
-        	<?php endwhile;  echo '</tbody></table></div>';  wp_reset_postdata();} ?>        
+        	<?php endwhile; ?> 
+            </tbody>
+        </table>
+        </div>
+<?php  wp_reset_postdata();} ?>        
        
    </div>
  </div>  
