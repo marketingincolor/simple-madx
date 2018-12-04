@@ -1,36 +1,6 @@
 <?php
-	$url = $_SERVER['REQUEST_URI'];
-
-	$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); 
-
-	//if (strpos($url, 'mu-types') !== false) {
-	//    get_header('madicou');
-	//}else{
-	//  get_header();
-	//}
-
-	/*if (strpos($url, 'residential') !== false) {
-	    $post_type = 'residential';
-	}else if (strpos($url, 'commercial') !== false) {
-	    $post_type = 'commercial';
-	}else if (strpos($url, 'automotive') !== false) {
-	    $post_type = 'automotive';
-	}else if (strpos($url, 'safety') !== false) {
-	    $post_type = 'safety';
-	}else if (strpos($url, 'specialty') !== false) {
-	    $post_type = 'specialty';
-	}
-	// madicoU
-	else if (strpos($url, 'video') !== false) {
-	    $post_type = 'video';
-	}else if (strpos($url, 'article') !== false) {
-	    $post_type = 'article';
-	}else if (strpos($url, 'document') !== false) {
-	    $post_type = 'document';
-	}*/
-
-	//get_template_part('template-parts/taxonomy/'.$post_type);
-	get_header();
+$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); 
+get_header();
 ?>
 
 <section class="page-content">
@@ -52,7 +22,7 @@
 				<?php
 				if ( ( is_tax() || is_category() || is_tag() ) ) {
 				    $trail     = '';
-				    $home      = '<a href="' . get_home_url() . '/downloads">Home</a>';
+				    $home      = '<a href="' . get_home_url() . '">Home</a>';
 				    $query_obj = get_queried_object();
 				    $crumb_term_id   = $query_obj->term_id;
 				    $crumb_taxonomy  = get_taxonomy( $query_obj->taxonomy );
@@ -71,14 +41,25 @@
 					//$term_children = get_term_children( $term->term_id, $term->taxonomy );
 					$term_children = get_terms( array('parent' => $term->term_id, 'hide_empty' => 0, 'taxonomy' => $term->taxonomy) );
 					if (!empty($term_children)) {
-						echo '<ul class="term-sibling-list">';
+
+
+						//echo '<ul class="term-sibling-list">';
 						foreach ( $term_children as $child ) {
 							//$sibling_term = get_term_by( 'id', $child, $term->taxonomy );
 							//$sibling_term = get_terms( array( 'child_of' => $term->term_id, /*'parent' => $term->parent,*/ 'taxonomy' => $term->taxonomy ) );
 
-							echo '<li class="term-sibling"><a href="' . get_term_link( $child, $term->taxonomy ) . '"><i class="fa fa-folder" aria-hidden="true"></i>&nbsp;' . $child->name . '</a></li>';
+							//echo '<li class="term-sibling"><a href="' . get_term_link( $child, $term->taxonomy ) . '"><i class="fa fa-folder" aria-hidden="true"></i>&nbsp;' . $child->name . '</a></li>';
 						}
-						echo '</ul>';
+						//echo '</ul>';
+
+
+						echo '<div class="grid-x grid-padding-x small-up-2 medium-up-4 large-up-6 term-sibling-list">';
+						foreach ( $term_children as $child ) {
+							echo '<div class="cell term-sibling"><a href="' . get_term_link( $child, $term->taxonomy ) . '"><i class="fa fa-folder" aria-hidden="true"></i><br><p>' . $child->name . '</p></a></div>';
+						}
+						echo '</div>';
+
+
 					}
 
 				}
@@ -96,8 +77,15 @@
 			<div <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
 				<div class="entry-content">
 
-				<?php //$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); 
-				echo '<div class="callout warning">Taxonomy / Term VAR data: <br>';
+
+<?php //echo do_shortcode('[members_access role="editor"]Hide this content from everyone but editors.[/members_access]'); ?>
+<?php //echo do_shortcode('[members_access role="subscriber"]Hide this content from everyone but subscribers.[/members_access]'); ?>
+<?php //echo do_shortcode('[members_access role="subscriber_safetyshield"]Visible to SAFETYSHIELD subscribers ONLY!![/members_access]'); ?>
+<?php //echo do_shortcode('[members_access role="subscriber_sunscape"]Visible to SUNSCAPE subscribers ONLY!![/members_access]'); ?>
+
+
+				<?php 
+				echo '<div class="callout warning" style="font-size:10px; display:none;">Taxonomy / Term VAR data: <br>';
 				echo 'id:' . $term->term_id; // will show the name
 				echo '<br>';
 				echo 'name:' . $term->name; // will show the name
@@ -118,19 +106,19 @@
 				echo '<br></div>';
 				?>
 
-				<?php 
-				// TESTING CODEBLOCK START
-				/*$terms = get_terms( 'dlm_download_category' );
-				foreach ( $terms as $term ) {
-					echo "<h2>" . $term->name . "</h2>";
-					$slug = $term->slug;
-					echo do_shortcode( "[downloads category='$slug']" );
-				}*/
-				// TESTING CODEBLOCK END
 
-				//$page_terms = $_GET['dlm_download_category'];
-				echo '<h3> Current Files - ' . single_term_title( '', false ) . '</h3>';
-				//echo do_shortcode( "[downloads category='$page_terms' category_include_children='false']" );
+<?php 
+if ( members_current_user_has_role( 'subscriber_safetyshield' ) || current_user_can( 'manage_options' ) ) {
+	//echo ':SAFETYSHIELD USER ROLE:'; 
+} elseif ( members_current_user_has_role( 'subscriber_sunscape' ) || current_user_can( 'manage_options' ) ) {
+	//echo ':SUNSCAPE USER ROLE:'; 
+} else {
+	//echo ':WRONG USER ROLE:'; 
+} 
+?>	
+
+				<?php // PRIMARY BLOCK TO RENDER ALL DOWNLOADS
+				echo '<h3> Current Folder - ' . single_term_title( '', false ) . '</h3>';
 				echo do_shortcode( "[downloads category='$term->slug' category_include_children='false']" );
 				?>
 

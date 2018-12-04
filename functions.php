@@ -407,7 +407,24 @@ class Walker_Category_Custom extends Walker_Category {
 }
 
 
+////////////////////////////////////
+// SHOW ADMIN BAR ONLY FOR ADMINS //
+////////////////////////////////////
+if (!current_user_can('manage_options')) {
+  add_filter('show_admin_bar', '__return_false');
+}
 
-
-
- 
+/////////////////////////////////////////
+// REDIRECT USER TO HOME PAGE ON LOGIN //
+/////////////////////////////////////////
+function brandhub_login_redirect( $url, $request, $user ){
+    if( $user && is_object( $user ) && is_a( $user, 'WP_User' ) ) {
+        if( $user->has_cap( 'administrator' ) ) {
+            $url = admin_url();
+        } else {
+            $url = home_url();
+        }
+    }
+    return $url;
+}
+add_filter('login_redirect', 'brandhub_login_redirect', 10, 3 );

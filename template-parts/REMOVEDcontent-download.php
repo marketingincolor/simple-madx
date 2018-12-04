@@ -16,91 +16,50 @@
 			<h1 class="blue"><?php the_title(); ?></h1>
 			<aside class="yellow-underline center"></aside>
 			<div class="subhead">
-				
-				<h5>List of CATS from DLM post type</h5>
+				<div class="entry-content">
 				<?php 
 				$new_cats = get_categories( array(
 					'taxonomy' => 'dlm_download_category',
 					'orderby' => 'parent',
 					'hierarchical' => true,
+					'hide_empty' => false,
 					'parent'  => 0
 				) ); 
 				echo "<ul class='get-cat-list'>";
 				foreach ( $new_cats as $single_cat ) {
-				    printf( '<li><a href="%1$s" class="cat-folder"><i class="fa fa-folder" aria-hidden="true"></i>%2$s</a></li>',
-				        //esc_url( '/downloads/'. $single_cat->category_nicename /*get_category_link( $single_cat->term_id )*/ ),
-				    	esc_url( site_url('/downloads/'. $single_cat->category_nicename) ),
+				    printf( '<li class="get-cat-list-entry"><a href="%1$s" class="xcat-folder"><i class="fa fa-folder" aria-hidden="true"></i> %2$s</a></li>',
+				    	esc_url( get_category_link( $single_cat->term_id ) ),
 				        esc_html( $single_cat->name )
 				    );
 				}
 				echo "</ul>";
 				?>
 
-				<h5>wp_list_categories method for DLM post type</h5>
 
-				<?php
-				$taxonomy     = 'dlm_download_category';
-				$orderby      = 'name'; 
-				$show_count   = false;
-				$pad_counts   = false;
-				$hierarchical = true;
-				$title        = '';
-				$args = array(
-				  'taxonomy'     => $taxonomy,
-				  'orderby'      => $orderby,
-				  'show_count'   => $show_count,
-				  'pad_counts'   => $pad_counts,
-				  'hierarchical' => $hierarchical,
-				  'title_li'     => $title
-				);
-				//echo "<ul class='wp-list-cat-list'>";
-				//wp_list_categories( $args );
-				//echo "</ul>";
+				<h5>get_categories method for DLM post type!! This is the ONE</h5>
 
-				//echo do_shortcode("[list]");
-				?>
-
-				<?php
-				$args = array(
-				  'taxonomy'     => 'dlm_download_category',
-				  'orderby'      => 'name',
-				  'show_count'   => false,
-				  'pad_counts'   => false,
-				  'hierarchical' => true,
-				  'parent'       => 0,
-				  'title_li'     => ''
-				);
-				//echo "<ul class='wp-list-cat-list'>";
-				//wp_list_categories( $args );
-				//echo "</ul>";
-
-				?>
-
-
-			<h5>get_categories method for DLM post type!! This is the ONE</h5>
-
-				<ul class="list-items categories term-sibling-list">
+				<ul class="get-cat-list">
 				<?php
 				$args = array(
 					'taxonomy' => 'dlm_download_category',
+					'orderby' => 'parent',
 					'hide_empty' => false,
 					'parent' => 0
 				);
 				$categories = get_categories( $args );
 				foreach ( $categories as $category ) {
-					echo '<li class="term-sibling"><a href="' . get_category_link( $category->term_id ) . '"><i class="fa fa-folder" aria-hidden="true"></i> ' . $category->name . '</a></li>';
+					echo '<li class="get-cat-list-entry"><a href="' . get_category_link( $category->term_id ) . '"><i class="fa fa-folder" aria-hidden="true"></i> ' . $category->name . '</a></li>';
 				}
 				?>
 				</ul>
+				</div>
 
 
 
-
-
-				<h5>wp_list_categories method for DLM post type using custom walker</h5>
+				<!--<h5>wp_list_categories method for DLM post type using custom walker</h5>-->
 
 				<?php
-	            $args = array(
+	            $wargs = array(
                     'show_option_all' => '',
                     'show_option_none'   => __('No categories'),
                     'orderby'         => 'name',
@@ -130,9 +89,9 @@
                     'hide_title_if_empty' => false,
                     'separator'       => '<br />',
 	            );
-	            echo '<ul class="walker-category-list">';
-	                            wp_list_categories( $args );          
-	            echo '</ul>';
+	            //echo '<ul class="walker-category-list">';
+	            //                wp_list_categories( $wargs );          
+	            //echo '</ul>';
 				?>
 
 

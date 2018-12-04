@@ -22,47 +22,13 @@ global $post; ?>
 	</div>
 </section>
 
-<section class="page-content">
+<section class="page-content" style="display:none;">
 	<div class="grid-container">
 		<main class="grid-x grid-margin-y">
 			<div <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
 				<div class="entry-content">
 
-					<?php 
-					$new_cats = get_categories( array(
-						'taxonomy' => 'dlm_download_category',
-						'orderby' => 'parent',
-						//'parent'  => 0
-					) ); 
-					foreach ( $new_cats as $single_cat ) {
-					    printf( '<li><a href="%1$s" class="cat-folder"><i class="fa fa-folder" aria-hidden="true"></i>%2$s</a></li>',
-					        //esc_url( '/downloads/'. $single_cat->category_nicename /*get_category_link( $single_cat->term_id )*/ ),
-					    	esc_url( site_url('/downloads/'. $single_cat->category_nicename) ),
-					        esc_html( $single_cat->name )
-					    );
-					}
-					?>
-					<hr><hr>
-					<?php
-					$categories = get_categories( array(
-						'taxonomy' => 'dlm_download_category',
-					    'orderby' => 'name',
-					    'order'   => 'ASC'
-					) );
-					 
-					foreach( $categories as $category ) {
-					    $category_link = sprintf( 
-					        '<a href="%1$s" alt="%2$s">%3$s</a>',
-					        esc_url( get_category_link( $category->term_id ) ),
-					        esc_attr( sprintf( __( 'View all posts in %s', 'textdomain' ), $category->name ) ),
-					        esc_html( $category->name )
-					    );
-					     
-					    echo '<p>' . sprintf( esc_html__( 'Category: %s', 'textdomain' ), $category_link ) . '</p> ';
-					    echo '<p>' . sprintf( esc_html__( 'Description: %s', 'textdomain' ), $category->description ) . '</p>';
-					    echo '<p>' . sprintf( esc_html__( 'Post Count: %s', 'textdomain' ), $category->count ) . '</p>';
-					} 
-					?>
+					!!!!!!!!!!
 
 				</div>
 			</div>
@@ -70,7 +36,7 @@ global $post; ?>
 	</div>
 </section>
 
-<section class="page-downloads">
+<section class="page-downloads" style="display:none;">
 	<div class="grid-container">
 		<main class="grid-x grid-margin-y">
 			<article id="post-<?php the_ID(); ?>" <?php post_class('small-10 small-offset-1 large-8 large-offset-2'); ?>>
@@ -92,8 +58,7 @@ global $post; ?>
 						}
 						echo "</div>";
 						//echo do_shortcode( "[downloads template='brandhub']" );
-						
-						echo do_shortcode( "[categorylist]" );
+						//echo do_shortcode( "[categorylist]" );
 						?>
 
 					<?php } else { ?>
@@ -105,18 +70,6 @@ global $post; ?>
 		</div>
 	</div>
 </section>
-
-
-<?php
-/*$terms = get_terms( 'dlm_download_category' );
-foreach ( $terms as $term ) {
-	echo "<h2>" . $term->name . "</h2>";
-	$slug = $term->slug;
-	echo do_shortcode( "[downloads category='$slug']" );
-}*/
-
-?>
-
 
 <?php
 get_footer();
