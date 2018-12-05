@@ -428,3 +428,8 @@ function brandhub_login_redirect( $url, $request, $user ){
     return $url;
 }
 add_filter('login_redirect', 'brandhub_login_redirect', 10, 3 );
+
+
+////////////////////////////////
+// REGISTER CUSTOM QUERY VARS //
+////////////////////////////////

@@ -21,12 +21,13 @@
 	<div class="entry-content" style="margin-bottom:6%;">
 	<?php // Check to see if user is LOGGED IN to show available downloads
     if ( is_user_logged_in() ) { ?>
-        <p class="breadcrumb-trail">Folders</p>
+        <p class="breadcrumb-trail">Home &raquo;</p>
         <div class="grid-x grid-padding-x small-up-2 medium-up-4 large-up-6 term-sibling-list">
         <?php
         $args = array(
             'taxonomy' => 'dlm_download_category',
-            'orderby' => 'parent',
+            //'orderby' => 'parent',
+            'orderby' => 'name',
             'hide_empty' => false,
             'parent' => 0
         );

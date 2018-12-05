@@ -7,9 +7,6 @@
     		<div class="grid-x grid-margin-x grid-margin-y">
           <div class="small-6 medium-4 large-2 cell">
             <img src="<?php bloginfo('template_directory'); ?>/dist/assets/images/logo-blue.png" alt="Madico">
-            <?php if ( is_user_logged_in() ) { ?>
-            <a href="<?php echo site_url('/wp-login.php?action=logout'); ?>">Logout</a>
-          <?php } ?>
           </div>
           <div class="small-6 medium-4 large-2 cell">
             <ul>

@@ -58,8 +58,13 @@
 			</div>
 			<div class="top-bar-right">
 				<ul class="menu">
-					<li><a href="/madicou"><i class="far fa-underline"></i>&nbsp; <?php _e( 'Madico U', 'madx' ); ?></a></li>
-					<li><a href="https://madicodealers.com"><i class="fas fa-id-badge"></i>&nbsp; <?php _e( 'Dealer Portal', 'madx' ); ?></a></li>
+				<?php if ( is_user_logged_in() ) { ?>
+            		<li><a href="<?php echo site_url('/wp-login.php?action=logout'); ?>"><i class="fas fa-user"></i>&nbsp; <?php _e( 'Login', 'madx' ); ?></a></li>
+          		<?php } else { ?>
+					<li><a href="<?php echo site_url('/wp-login.php'); ?>"><i class="fas fa-user"></i>&nbsp; <?php _e( 'Login', 'madx' ); ?></a></li>
+          		<?php } ?>
+					<li><a href="https://madico.com/madicou"><i class="far fa-underline"></i>&nbsp; <?php _e( 'Madico U', 'madx' ); ?></a></li>
+					<li><a href="https://dealers.madico.com"><i class="fas fa-id-badge"></i>&nbsp; <?php _e( 'Dealer Portal', 'madx' ); ?></a></li>
 		      <li>
 		        <a data-toggle="search-dropdown"><i class="fas fa-search"></i>&nbsp; <?php _e( 'Search', 'madx' ); ?></a>
 		        <ul class="menu vertical">
