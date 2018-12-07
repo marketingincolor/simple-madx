@@ -20,7 +20,8 @@ get_header();
 				</div>
 
 				<div class="entry-content">
-
+				<?php // Check to see if user is LOGGED IN to show available downloads
+			    if ( is_user_logged_in() ) { ?>
 				<?php //if (function_exists('wordpress_tax_breadcrumbs')) wordpress_tax_breadcrumbs(); ?>
 
 				<?php
@@ -34,7 +35,6 @@ get_header();
 				    if ( $crumb_term_id && $crumb_taxonomy ) {
 				        $trail .= ' &raquo; ' . get_term_parents_list( $crumb_term_id, $crumb_taxonomy->name, array( 'inclusive' => false, 'separator' => ' &raquo; ' ) );
 				    }
-				 
 				    // Print trail and add current term name at the end.
 				    echo '<p class="breadcrumb-trail">' . $home . $trail . $query_obj->name . ' <i class="fa fa-folder-open" aria-hidden="true"></i></p>';
 
@@ -55,7 +55,9 @@ get_header();
 
 				}
 				?>
-
+				<?php } else { ?>
+				    <p class="breadcrumb-trail">To view all available downloads, please <a href="<?php echo site_url(); ?>/wp-login.php" title="Members Area Login" rel="home">log in now</a>!</p>
+				<?php } ?>
 				</div>
 			</div>
 		</main>

@@ -17466,7 +17466,7 @@ readers do not read off random characters that represent icons */
   color: #a7a9ac; }
 
 
-
+/* CUSTOMIZATIONS AND EDITS FOR BRAND HUB SITE */
 .cat-folder { font-size: 24px; }
 .cat-folder i { padding: 0em .5em; }
 .tax-dlm_download_category .breadcrumb-trail, .breadcrumb-trail {
@@ -17479,19 +17479,6 @@ readers do not read off random characters that represent icons */
   box-shadow: 0 1px 6px 2px #eee; }
   .tax-dlm_download_category .entry-content h3 {
     color: #1a598c; }
-
-/*.tax-dlm_download_category .term-sibling-list {
-  list-style-type:none;
-}
-.tax-dlm_download_category .term-sibling {
-  display:inline-flex;
-  padding:0em .5em;
-  font-size:1.25em;
-}*/
-
-/*.tax-dlm_download_category .term-sibling-list {
-  list-style-type:none;
-}*/
 .term-sibling {
   text-align:center; 
   padding-bottom:1em;

@@ -59,7 +59,7 @@
 			<div class="top-bar-right">
 				<ul class="menu">
 				<?php if ( is_user_logged_in() ) { ?>
-            		<li><a href="<?php echo site_url('/wp-login.php?action=logout'); ?>"><i class="fas fa-user"></i>&nbsp; <?php _e( 'Login', 'madx' ); ?></a></li>
+            		<li><a href="<?php echo site_url('/wp-login.php?action=logout'); ?>"><i class="fas fa-user"></i>&nbsp; <?php _e( 'Logout', 'madx' ); ?></a></li>
           		<?php } else { ?>
 					<li><a href="<?php echo site_url('/wp-login.php'); ?>"><i class="fas fa-user"></i>&nbsp; <?php _e( 'Login', 'madx' ); ?></a></li>
           		<?php } ?>
