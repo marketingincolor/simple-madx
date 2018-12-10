@@ -17489,6 +17489,7 @@ readers do not read off random characters that represent icons */
 .term-sibling p {
  font-size:14px; 
  line-height:1em;
+ overflow-wrap:break-word;
 }
 
 .get-cat-list {
