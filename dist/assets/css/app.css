@@ -17467,10 +17467,22 @@ readers do not read off random characters that represent icons */
 
 
 /* CUSTOMIZATIONS AND EDITS FOR BRAND HUB SITE */
+section { padding: 5% 0; }
+.brand-entry-content { margin:3em 0em 4em; }
+.page-hero { padding:5% 0; }
+.orange-button, .orange-button:hover, .orange-button:visited, .orange-button:active {
+  background-color:#e09e10;
+  border-radius:100px;
+  padding:1em 3em;
+  color:#fff;
+  font-weight:600;
+  text-transform:uppercase;
+}
 .cat-folder { font-size: 24px; }
 .cat-folder i { padding: 0em .5em; }
 .tax-dlm_download_category .breadcrumb-trail, .breadcrumb-trail {
-  font-size:1.5em;
+  font-size:1em;
+  margin-bottom:2em;
 }
 .tax-dlm_download_category .entry-content {
   background-color: #FFF;
@@ -17481,14 +17493,15 @@ readers do not read off random characters that represent icons */
     color: #1a598c; }
 .term-sibling {
   text-align:center; 
+  padding-top:2em;
   padding-bottom:1em;
 }
-.term-sibling a {
- font-size:3em; 
-}
+.term-sibling .fa-folder { font-size:4em; }
+.term-sibling .fal { font-size:3em; }
+/* .term-sibling a { font-size:3em; } */
 .term-sibling p {
  font-size:14px; 
- line-height:1em;
+ line-height:1.25em;
  overflow-wrap:break-word;
 }
 

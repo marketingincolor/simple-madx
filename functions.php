@@ -239,7 +239,7 @@ function wordpress_breadcrumbs() {
 
 // Add breadcrumbs to page via PHP embed: if (function_exists('wordpress_tax_breadcrumbs')) wordpress_tax_breadcrumbs();
 function wordpress_tax_breadcrumbs() {
-  $delimiter = '&raquo;';
+  $delimiter = '&nbsp;&nbsp;&raquo;&nbsp;&nbsp;';
   $name = 'Home'; //text for the 'Home' link
   $currentBefore = '<span class="current">';
   $currentAfter = '</span>';
@@ -319,15 +319,15 @@ function wordpress_tax_breadcrumbs() {
       $taxTerm = get_term($useTerm, $useTax);
       $ttp_lvl_1_id = $taxTerm->parent;
       $ttp_lvl_1_term = get_term($ttp_lvl_1_id, $useTax);
-      $lvl_1 = isset($ttp_lvl_1_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_1_term->slug.' ">'.$ttp_lvl_1_term->name.'</a> &raquo; ' : '';
+      $lvl_1 = isset($ttp_lvl_1_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_1_term->slug.' ">'.$ttp_lvl_1_term->name.'</a>&nbsp;&nbsp;&raquo;&nbsp;&nbsp;' : '';
 
       $ttp_lvl_2_id = $ttp_lvl_1_term->parent;
       $ttp_lvl_2_term = get_term($ttp_lvl_2_id, $useTax);
-      $lvl_2 = isset($ttp_lvl_2_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_2_term->slug.' ">'.$ttp_lvl_2_term->name.'</a> &raquo; ' : '';
+      $lvl_2 = isset($ttp_lvl_2_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_2_term->slug.' ">'.$ttp_lvl_2_term->name.'</a>&nbsp;&nbsp;&raquo;&nbsp;&nbsp;' : '';
 
       $ttp_lvl_3_id = $ttp_lvl_2_term->parent;
       $ttp_lvl_3_term = get_term($ttp_lvl_3_id, $useTax);
-      $lvl_3 = isset($ttp_lvl_3_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_3_term->slug.' ">'.$ttp_lvl_3_term->name.'</a> &raquo; ' : '';
+      $lvl_3 = isset($ttp_lvl_3_term->name) ? '<a href="?dlm_download_category='.$ttp_lvl_3_term->slug.' ">'.$ttp_lvl_3_term->name.'</a>&nbsp;&nbsp;&raquo;&nbsp;&nbsp;' : '';
 
       echo $currentBefore . $lvl_5 . $lvl_4 . $lvl_3 . $lvl_2 . $lvl_1 . $taxTerm->name . $currentAfter;
 
