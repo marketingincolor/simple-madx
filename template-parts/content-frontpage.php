@@ -6,6 +6,18 @@
  * @package FoundationPress
  * @since FoundationPress 1.0.0
  */
+$key_term_id_one = get_term_by( 'name', 'sunscape', 'dlm_download_category' );
+$sctermid = $key_term_id_one->term_id; // should be 4
+$key_term_id_two = get_term_by( 'name', 'safetyshield', 'dlm_download_category' );
+$sstermid = $key_term_id_two->term_id; // should be 3
+$exclude = '';
+if ( !current_user_can( 'view_sunscape' ) ) {
+	$exclude = $sctermid;
+} if ( !current_user_can( 'view_safetyshield' ) ) {
+	$exclude = $sstermid;
+} if ( !current_user_can( 'view_sunscape' ) && !current_user_can( 'view_safetyshield' ) ) {
+	$exclude = array($sctermid, $sstermid);
+}
 if ( is_user_logged_in() ) { 
 	$headline = "Madico Brand Hub";
 	$subhead = "Below you will be able to access everything from technical specs to marketing materials, relevant to you as a Madico dealer and to the products you purchase from Madico. Simply click on a top level folder to navigate and click on an individual file within to easily download it to your device.";
@@ -38,6 +50,7 @@ if ( is_user_logged_in() ) {
 	            'taxonomy' => 'dlm_download_category',
 	            //'orderby' => 'parent',
 	            'orderby' => 'name',
+	        	'exclude' => $exclude,
 	            'hide_empty' => false,
 	            'parent' => 0
 	        );
