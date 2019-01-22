@@ -10,21 +10,38 @@ $key_term_id_one = get_term_by( 'name', 'sunscape', 'dlm_download_category' );
 $sctermid = $key_term_id_one->term_id; // should be 4
 $key_term_id_two = get_term_by( 'name', 'safetyshield', 'dlm_download_category' );
 $sstermid = $key_term_id_two->term_id; // should be 3
+$key_term_id_three = get_term_by( 'name', 'protectionpro', 'dlm_download_category' );
+$pptermid = $key_term_id_three->term_id; // should be 79
 $exclude = '';
 if ( !current_user_can( 'view_sunscape' ) ) {
 	$exclude = $sctermid;
-} if ( !current_user_can( 'view_safetyshield' ) ) {
+} 
+if ( !current_user_can( 'view_safetyshield' ) ) {
 	$exclude = $sstermid;
-} if ( !current_user_can( 'view_sunscape' ) && !current_user_can( 'view_safetyshield' ) ) {
+} 
+if ( !current_user_can( 'view_protectionpro' ) ) {
+	$exclude = $pptermid;
+} 
+if ( !current_user_can( 'view_sunscape' ) && !current_user_can( 'view_safetyshield' ) ) {
 	$exclude = array($sctermid, $sstermid);
 }
+if ( !current_user_can( 'view_sunscape' ) && !current_user_can( 'view_protectionpro' ) ) {
+	$exclude = array($sctermid, $pptermid);
+}
+if ( !current_user_can( 'view_protectionpro' ) && !current_user_can( 'view_safetyshield' ) ) {
+	$exclude = array($pptermid, $sstermid);
+}
+if ( !current_user_can( 'view_sunscape' ) && !current_user_can( 'view_safetyshield' ) && !current_user_can( 'view_protectionpro' ) ) {
+	$exclude = array($sctermid, $sstermid, $pptermid);
+}
+
 if ( is_user_logged_in() ) { 
 	$headline = "Madico Brand Hub";
 	$subhead = "Below you will be able to access everything from technical specs to marketing materials, relevant to you as a Madico dealer and to the products you purchase from Madico. Simply click on a top level folder to navigate and click on an individual file within to easily download it to your device.";
 } else {
 	$headline = get_the_title();
 	//$subhead = get_the_content();
-	$subhead = "This is your one-stop location for all files and downloads that have been made available to you as an Authorized Madico Dealer.";
+	$subhead = "This is your one-stop location for marketing collateral including printed materials, promotional items, images, logos, technical documents, forms, and other support made available to you as an Authorized Madico Dealer or Distributor.";
 }
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('small-12'); ?>>

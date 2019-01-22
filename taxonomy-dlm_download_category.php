@@ -4,12 +4,6 @@
  *
  */
 $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); 
-//$ancestors = get_ancestors( $term->term_id, 'dlm_download_category' );
-//$termval = end($ancestors);
-//$findterm = get_term( $termval, 'dlm_download_category');
-//$basetermslug = $findterm->slug;
-
-//$warranty_omit = '';
 $exclude = '';
 $shortcode_exclude = '';
 
@@ -20,6 +14,18 @@ if ( current_user_can( 'view_international' ) ) {
 	$warranty_omit = get_term_by( 'slug', 'mmm-warranties', 'dlm_download_category' );
 	$exclude = $warranty_omit->term_id; //This CAN be a comma-seperated list of MULTIPLE VALUES
 	$shortcode_exclude = " exclude='" . $warranty_omit->term_id . "' ";
+}
+if ( current_user_can( 'view_protectionpro' ) ) {
+	// Add code for term restriction here
+}
+if ( current_user_can( 'view_protectionpro_sales' ) ) {
+	// Add code for term restriction here
+}
+if ( current_user_can( 'view_safetyshield' ) ) {
+	// Add code for term restriction here
+}
+if ( current_user_can( 'view_sunscape' ) ) {
+	// Add code for term restriction here
 }
 // END CUSTOM RESTRICTIONS
 
@@ -95,24 +101,6 @@ get_header();
 			<?php } else { ?>
 			    <p class="breadcrumb-trail">To view all available downloads, please <a href="<?php echo site_url(); ?>/wp-login.php" title="Members Area Login" rel="home">log in now</a>!</p>
 			<?php } ?>
-				</div>
-			</div>
-		</main>
-	</div>
-</section>
-
-<section class="page-content" style="display:none;">
-	<div class="grid-container">
-		<main class="grid-x grid-margin-y">
-			<div <?php post_class('small-12'); ?>>
-				<div class="brand-entry-content">
-
-				<?php // PRIMARY BLOCK TO RENDER ALL DOWNLOADS
-				//$shortcode = "[downloads category='$term->slug' category_include_children='false' template='brandhub' loop_start='<div class=&quot;grid-x grid-padding-x small-up-2 medium-up-4 large-up-6 term-sibling-list&quot;>' loop_end='</div>' before='<div class=&quot;cell term-sibling&quot;>' after='</div>' ]";
-				//echo '<p class="breadcrumb-trail"> Current Folder - ' . single_term_title( '', false ) . '</p>';
-				//echo do_shortcode( $shortcode );
-				?>
-
 				</div>
 			</div>
 		</main>
