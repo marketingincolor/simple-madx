@@ -4992,7 +4992,7 @@ a.thumbnail {
           flex-wrap: wrap; }
   .top-bar,
   .top-bar ul {
-    background-color: #333; }
+    background-color: #fff; }
   .top-bar input {
     max-width: 200px;
     margin-right: 1rem; }
@@ -15189,7 +15189,7 @@ readers do not read off random characters that represent icons */
 #top-header {
   border-bottom: 1px solid #e5e6e6; }
   #top-header .site-desktop-title.top-bar-title {
-    margin: 0; }
+    margin: 0 10px 0 0; }
     #top-header .site-desktop-title.top-bar-title #madico-bug, #top-header .site-desktop-title.top-bar-title a {
       transition: all 0.25s ease-in-out; }
       #top-header .site-desktop-title.top-bar-title #madico-bug:hover, #top-header .site-desktop-title.top-bar-title a:hover {
@@ -15261,7 +15261,8 @@ readers do not read off random characters that represent icons */
       #top-header nav {
         display: none; } }
     #top-header nav #nav-drop {
-      letter-spacing: 1px; }
+      letter-spacing: 1px;
+      height:100%; }
     #top-header nav a {
       color: #636466;
       background-color: #FFF; }
@@ -15270,7 +15271,8 @@ readers do not read off random characters that represent icons */
   #top-header .top-bar-left, #top-header .top-bar-right {
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex; }
+    display: flex; 
+    height:47px; }
     #top-header .top-bar-left .is-dropdown-submenu-parent > a, #top-header .top-bar-right .is-dropdown-submenu-parent > a {
       padding-left: 0; }
     #top-header .top-bar-left .dropdown.menu > li.opens-right > .is-dropdown-submenu, #top-header .top-bar-right .dropdown.menu > li.opens-right > .is-dropdown-submenu {
@@ -15279,7 +15281,7 @@ readers do not read off random characters that represent icons */
       background-color: #00467f;
       min-width: 150px; }
     #top-header .top-bar-left .submenu, #top-header .top-bar-right .submenu {
-      border-top: 1px solid #FFF; }
+      /*border-top: 1px solid #FFF;*/ }
       #top-header .top-bar-left .submenu a, #top-header .top-bar-left .submenu i, #top-header .top-bar-right .submenu a, #top-header .top-bar-right .submenu i {
         color: #FFF; }
       #top-header .top-bar-left .submenu a, #top-header .top-bar-right .submenu a {

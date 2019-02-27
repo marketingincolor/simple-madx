@@ -47,7 +47,7 @@
 		<nav class="site-navigation top-bar" role="navigation">
 			<div class="top-bar-left">
 				<div class="site-desktop-title top-bar-title">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><img src="<?php bloginfo('template_directory'); ?>/dist/assets/images/bug-gray.png" alt="Madico"></a>
+					<a href="https://madico.com" title="Madico Home" rel="home"><?php get_template_part('/template-parts/svg/madico-bug'); ?></a>
 				</div>
 				<ul class="dropdown menu" data-closing-time="0" v-dropdown>
 		      <li>
@@ -63,7 +63,7 @@
           		<?php } else { ?>
 					<li><a href="<?php echo site_url('/wp-login.php'); ?>"><i class="fas fa-user"></i>&nbsp; <?php _e( 'Login', 'madx' ); ?></a></li>
           		<?php } ?>
-					<li><a href="https://madico.com/madicou"><i class="far fa-underline"></i>&nbsp; <?php _e( 'Madico U', 'madx' ); ?></a></li>
+					<li><a href="https://madico.com/madicou"><i class="icon-madico-u-icon"></i>&nbsp; <?php _e( 'Madico U', 'madx' ); ?></a></li>
 					<li><a href="https://dealers.madico.com"><i class="fas fa-id-badge"></i>&nbsp; <?php _e( 'Dealer Portal', 'madx' ); ?></a></li>
 		      <li>
 		        <a data-toggle="search-dropdown"><i class="fas fa-search"></i>&nbsp; <?php _e( 'Search', 'madx' ); ?></a>
