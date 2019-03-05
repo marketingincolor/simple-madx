@@ -67,7 +67,7 @@ if ( is_user_logged_in() ) {
 	            'taxonomy' => 'dlm_download_category',
 	            //'orderby' => 'parent',
 	            'orderby' => 'name',
-	        	'exclude' => $exclude,
+	        	'exclude' => $exclude . ",36",//34 for LIVE, 36 for devLOCAL - temporarily disable display of image gallery section
 	            'hide_empty' => false,
 	            'parent' => 0
 	        );

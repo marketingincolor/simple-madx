@@ -81,7 +81,7 @@ get_header();
 				    echo '<p class="breadcrumb-trail">' . $home . $trail . $query_obj->name . '&nbsp;&nbsp;<i class="fa fa-folder-open" aria-hidden="true"></i></p>';
 
 				    // Modified $ARGS Array to include EXCLUSIONS as defined above
-					$term_children = get_terms( array('parent' => $term->term_id, 'hide_empty' => 0, 'taxonomy' => $term->taxonomy, 'exclude' => $exclude ) );
+					$term_children = get_terms( array('parent' => $term->term_id, 'hide_empty' => 1, 'taxonomy' => $term->taxonomy, 'exclude' => $exclude ) );
 
 					if (!empty($term_children)) {
 						echo '<div class="grid-x grid-padding-x small-up-2 medium-up-4 large-up-6 term-sibling-list">';
