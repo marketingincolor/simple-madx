@@ -11,48 +11,48 @@
           <div class="small-6 medium-4 large-2 cell">
             <ul>
               <li class="heading"><h6 class="blue">Company</h6></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/about/history">History</a></li>
-              <li><a href="/about/madico-cares">Madico Cares</a></li>
-              <li><a href="/blog/news">News</a></li>
-              <li><a href="/about/careers">Careers</a></li>
-              <li><a href="/faqs">FAQs</a></li>
-              <li><a href="/about/procurement">Procurement</a></li>
-              <li><a href="/about/quality-environment-and-contingency">Quality, Environment & Contingency</a></li>
-              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="https://madico.com/about">About</a></li>
+              <li><a href="https://madico.com/about/history">History</a></li>
+              <li><a href="https://madico.com/about/madico-cares">Madico Cares</a></li>
+              <li><a href="https://madico.com/blog/news">News</a></li>
+              <li><a href="https://madico.com/about/careers">Careers</a></li>
+              <li><a href="https://madico.com/faqs">FAQs</a></li>
+              <li><a href="https://madico.com/about/procurement">Procurement</a></li>
+              <li><a href="https://madico.com/about/quality-environment-and-contingency">Quality, Environment & Contingency</a></li>
+              <li><a href="https://madico.com/contact">Contact Us</a></li>
             </ul>
           </div>
           <div class="small-6 medium-4 large-2 cell">
             <ul>
               <li class="heading"><h6 class="blue">Films</h6></li>
-              <li><a href="/automotive">Automotive</a></li>
-              <li><a href="/residential">Residential</a></li>
-              <li><a href="/commercial">Commercial</a></li>
-              <li><a href="/safety-security">Safety &amp; Security</a></li>
-              <li><a href="/find-dealer">Find a Dealer</a></li>
-              <li><a href="/distribution">Distribution</a></li>
+              <li><a href="https://madico.com/automotive">Automotive</a></li>
+              <li><a href="https://madico.com/residential">Residential</a></li>
+              <li><a href="https://madico.com/commercial">Commercial</a></li>
+              <li><a href="https://madico.com/safety-security">Safety &amp; Security</a></li>
+              <li><a href="https://madico.com/find-dealer">Find a Dealer</a></li>
+              <li><a href="https://madico.com/distribution">Distribution</a></li>
             </ul>
           </div>
           <div class="small-6 medium-4 large-2 cell">
             <ul>
               <li class="heading"><h6 class="blue">Specialty</h6></li>
-              <li><a href="/specialty-solutions">Specialty Solutions</a></li>
-              <li><a href="/specialty-solutions/industries">Industries</a></li>
-              <li><a href="/specialty-solutions/products">Products</a></li>
-              <li><a href="/specialty-solutions/capabilities">Capabilities</a></li>
-              <li><a href="/specialty-solutions/case-studies">Case Studies</a></li>
-              <li><a href="/specialty-solutions/contact">Contact</a></li>
+              <li><a href="https://madico.com/specialty-solutions">Specialty Solutions</a></li>
+              <li><a href="https://madico.com/specialty-solutions/industries">Industries</a></li>
+              <li><a href="https://madico.com/specialty-solutions/products">Products</a></li>
+              <li><a href="https://madico.com/specialty-solutions/capabilities">Capabilities</a></li>
+              <li><a href="https://madico.com/specialty-solutions/case-studies">Case Studies</a></li>
+              <li><a href="https://madico.com/specialty-solutions/contact">Contact</a></li>
             </ul>
           </div>
           <div class="small-6 medium-4 large-2 cell">
             <ul>
               <li class="heading"><h6 class="blue">Dealers</h6></li>
-              <li><a href="https://madicodealers.com">Dealer Portal</a></li>
-              <li><a href="#!">Become a Dealer</a></li>
-              <li><a href="#!">Products</a></li>
-              <li><a href="/madicou">Madico U</a></li>
-              <li><a href="#!">Dealer Programs</a></li>
-              <li><a href="/distribution">Distribution</a></li>
+              <li><a href="https://madico.com/dealers">Dealer Portal</a></li>
+              <li><a href="https://madico.com/dealers/become-dealer">Become a Dealer</a></li>
+              <li><a href="https://madico.com/madicou">Madico U</a></li>
+              <li><a href="https://madico.com/dealers/dealer-support-programs">Dealer Programs</a></li>
+              <li><a href="https://madico.com/distribution">Distribution</a></li>
+              <li><a href="https://madico.com/dealers/dealer-recognition-programs">Dealer Recognition</a></li>
             </ul>
           </div>
           <div class="small-6 medium-4 large-2 cell">
