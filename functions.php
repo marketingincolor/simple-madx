@@ -407,12 +407,79 @@ class Walker_Category_Custom extends Walker_Category {
 }
 
 
-////////////////////////////////////
-// SHOW ADMIN BAR ONLY FOR ADMINS //
-////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+// SHOW ADMIN BAR ONLY FOR ADMINS AND OTHER ADMIN MODIFICATIONS //
+//////////////////////////////////////////////////////////////////
 if (!current_user_can('manage_options')) {
   add_filter('show_admin_bar', '__return_false');
 }
+if (!current_user_can('manage_options')) {
+  function remove_menus(){  
+
+    remove_menu_page( 'index.php' );                  //Dashboard  
+    remove_menu_page( 'edit.php' );                   //Posts  
+    remove_menu_page( 'upload.php' );                 //Media  
+    remove_menu_page( 'edit.php?post_type=page' );    //Pages  
+    remove_menu_page( 'edit-comments.php' );          //Comments  
+    remove_menu_page( 'themes.php' );                 //Appearance  
+    remove_menu_page( 'plugins.php' );                //Plugins  
+    remove_menu_page( 'users.php' );                  //Users  
+    remove_menu_page( 'tools.php' );                  //Tools  
+    remove_menu_page( 'options-general.php' );        //Settings  
+
+  }  
+  add_action( 'admin_menu', 'remove_menus' ); 
+
+  // removes admin color scheme options
+  remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
+
+  //Removes the leftover 'Visual Editor', 'Keyboard Shortcuts' and 'Toolbar' options.
+  add_action( 'admin_head', function () {
+      ob_start( function( $subject ) {
+          $subject = preg_replace( '#<h[0-9]>'.__("Personal Options").'</h[0-9]>.+?/table>#s', '', $subject, 1 );
+          return $subject;
+      });
+  });
+  add_action( 'admin_footer', function(){
+      ob_end_flush();
+  }); 
+
+  //Removes the  'About Yourself' options.
+  add_action( 'admin_head', function () {
+      ob_start( function( $subject ) {
+          $subject = preg_replace( '#<h[0-9]>'.__("About Yourself").'</h[0-9]>.+?/table>#s', '', $subject, 1 );
+          return $subject;
+      });
+  });
+  add_action( 'admin_footer', function(){
+      ob_end_flush();
+  }); 
+
+  //Revise the Account Management message
+  add_action( 'admin_head', function () {
+      ob_start( function( $subject ) {
+          $subject = preg_replace( '#<h[0-9]>'.__("Account Management").'</h[0-9]>#s', '<h2>Your Password</h2><p class="description">To change your password, simply click the <b>Generate Password</b> button below, which will automatically generate a new password for you.<br>You may change this anything you like, but if it does not meet the strength requirements you will ahve to acknowledge that you have chosen a weak password by checking the box shown.<br>Your new password will NOT be saved until you click the <b>Update Profile</b> button below.</p>', $subject, 1 );
+          return $subject;
+      });
+  });
+  add_action( 'admin_footer', function(){
+      ob_end_flush();
+  }); 
+
+
+}
+// Replace Howdy Greeting
+function replace_howdy_greeting( $wp_admin_bar ) {
+  $my_account=$wp_admin_bar->get_node('my-account');
+  $newtitle = str_replace( 'Howdy', 'Welcome', $my_account->title );
+  $wp_admin_bar->add_node( array(
+    'id' => 'my-account',
+    'title' => $newtitle,
+  ) );
+}
+add_filter( 'admin_bar_menu', 'replace_howdy_greeting', 12 );
+
+
 
 /////////////////////////////////////////
 // REDIRECT USER TO HOME PAGE ON LOGIN //
