@@ -79,6 +79,7 @@ if ( is_user_logged_in() ) {
 	        </div>
 		<?php } else { ?>
 		    <p class="breadcrumb-trail" style="text-align:center;"><a href="<?php echo site_url(); ?>/wp-login.php" title="Members Area Login" rel="home" class="orange-button">LOG IN NOW</a></p>
+		    <p class="breadcrumb-trail" style="text-align:center;"><a href="<?php echo site_url(); ?>/access" style="color:inherit; text-decoration:underline;" title="Sign Up">Sign Up</a></p>
 		<?php } ?>
 
 	</div>
